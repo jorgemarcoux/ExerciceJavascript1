@@ -1,14 +1,14 @@
 $(document).ready(function () {
     $("#numElev_2, #numElev_3, #elevPriceUnit, #elevTotal, #installationFee, #total_").attr('readonly', true);
 
-    var numApp, numFloors, numBase, maxOcc;
+    var numApp, numFloors, numBase, maxOcc, numElev;
     var prodRange = {
         type: null,
         price: null,
         installationFeePercentage: null
     };
 
-    $('.formField').on('keyup', function () {
+    $('.formField').on('keyup change', function () {
         doCalc();
     });
 
@@ -56,8 +56,20 @@ $(document).ready(function () {
     };
 
     function getInfoMaxOcc() {
-        maxOcc = $('#maxOcc').val();
+        maxOcc = parseInt($('#maxOcc').val());
     };
+    
+    $(function(){
+      $('#numApp, #numFloors, #numBase, #maxOcc, numElev').change(function () {
+        getInfoNumApp();
+        getInfoNumElev();
+        getInfoNumFloors();
+        getInfoNumBase();
+    });
+    });
+
+
+
 
     function getProdRange() {
         if ($('#standard').is(':checked')) {
@@ -114,6 +126,7 @@ $(document).ready(function () {
             numberFloors: numFloors,
             numberBase: numBase,
             maximumOcc: maxOcc,
+            numberElev: numElev,
             productRange: prodRange,
             projectType: projectType
         }
@@ -196,9 +209,9 @@ $(document).ready(function () {
     }
     
     function doCalc() {
-        if ($('#residential').hasClass('active') && !negativeValues() && $('#numApp').val() && $('#numFloors').val()) {
+        if ($('#residential').hasClass('active') && !negativeValues() && $('#numApp').val() && $('#numBase').val() && $('#numFloors').val() ) {
             apiCall('residential');
-        } else if ($('#commercial').hasClass('active') && !negativeValues() && $('#numElev').val() ) {
+        } else if ($('#commercial').hasClass('active') && !negativeValues() && $('#numElev').val()  ) {
             apiCall('commercial');
         } else if ($('#corporate').hasClass('active') && !negativeValues() && $('#numFloors').val() && $('#numBase').val() && $('#maxOcc').val()) {
             apiCall('corporate');
