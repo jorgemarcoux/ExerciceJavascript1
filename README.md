@@ -25,7 +25,7 @@ Comme plusieurs employés travailleront à corriger ces problèmes, on vous dema
 
 8- FIXED - Le calcul Hybrid ne fonctionne pas du tout 
 
-9- FIXED - Un calcul avec l'option Premium donne un prix erroné
+9- FIXED -  Un calcul avec l'option Premium donne un prix erroné
 
 10- Cliquer sur le bouton Standard ne semble pas refaire un nouveau calcul
 
